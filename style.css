@@ -1,0 +1,18 @@
+/* Atur kontainer atau kotak memori */
+.memory-card, .card, .container {
+    height: auto !important;
+    min-height: unset !important;
+    max-height: none !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-bottom: 20px;
+}
+
+/* Pastikan gambar di dalam card proporsional */
+img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
