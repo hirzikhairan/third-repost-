@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #FFF5F7;
+            --card-bg: #FFFFFF;
+            --primary-pink: #FFB6C1;
+            --accent-pink: #FF6B81;
+            --soft-purple: #E6E6FA;
+            --text-color: #5A4A42;
+            --border-color: #FFD1DC;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        body {
+            background-color: #F8F8F8;
+            display: flex;
+            justify-content: center;
+            color: var(--text-color);
+        }
+
+        /* Container layar HP */
+        .mobile-container {
+            width: 100%;
+            max-width: 430px;
+            background-color: var(--bg-color);
+            min-height: 100vh;
+            padding: 20px 16px 110px 16px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Fredoka', cursive;
+            color: var(--accent-pink);
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .nav-icons {
+            display: flex;
+            justify-content: space-around;
+            background: var(--card-bg);
+            padding: 10px;
+            border-radius: 20px;
+            border: 2px dashed var(--border-color);
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .nav-item:active {
+            transform: scale(0.95);
+        }
+
+        /* Card Section */
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 20px;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 4px 10px rgba(255, 182, 193, 0.2);
+        }
+
+        .card-title {
+            font-family: 'Fredoka', cursive;
+            text-align: center;
+            color: var(--accent-pink);
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        /* Polaroid Carousel (10 Slides) */
+        .polaroid-container {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scroll-snap-type: x mandatory;
+        }
+
+        .polaroid {
+            flex: 0 0 80%;
+            scroll-snap-align: center;
+            background: #FFF;
+            padding: 10px 10px 20px 10px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            border: 1px solid #EEE;
+            text-align: center;
+            transform: rotate(-1deg);
+        }
+
+        .polaroid:nth-child(even) {
+            transform: rotate(1deg);
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .polaroid-caption {
+            font-size: 13px;
+            font-weight: bold;
+            color: #777;
+        }
+
+        /* Mood Selector */
+        .mood-options {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .mood-btn {
+            background: var(--bg-color);
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
+            padding: 8px 12px;
+            text-align: center;
+            font-size: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .mood-btn:hover {
+            background: var(--primary-pink);
+            color: white;
+        }
+
+        /* Buttons Section */
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.05);
+            transition: transform 0.1s;
+        }
+
+        .btn:active {
+            transform: translateY(2px);
+        }
+
+        .btn-feed {
+            background-color: var(--soft-purple);
+            color: #5A4A42;
+        }
+
+        .btn-coupon {
+            background-color: var(--primary-pink);
+            color: white;
+            width: 100%;
+        }
+
+        /* Wish List Textarea */
+        textarea {
+            width: 100%;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            font-family: inherit;
+            font-size: 13px;
+            resize: none;
+            outline: none;
+            margin-bottom: 12px;
+            background: #FFF9FA;
+            color: var(--text-color);
+        }
+
+        textarea:focus {
+            border-color: var(--accent-pink);
+        }
+
+        /* Floating Cat Icon */
+        .floating-cat {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: white;
+            border: 2px solid var(--accent-pink);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            cursor: pointer;
+            z-index: 99;
+        }
+
+        /* Floating Music Player Bar */
+        .music-player-bar {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 32px);
+            max-width: 398px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border: 2px solid var(--accent-pink);
+            border-radius: 25px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 6px 15px rgba(255, 107, 129, 0.25);
+            z-index: 100;
+        }
+
+        .music-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            overflow: hidden;
+        }
+
+        .disc-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #FFB6C1, #FF6B81);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+
+        .disc-icon.spinning {
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .song-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .song-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--text-color);
+            white-space: nowrap;
+        }
+
+        .song-artist {
+            font-size: 10px;
+            color: #888;
+        }
+
+        .play-btn {
+            background: var(--accent-pink);
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 3px 6px rgba(255, 107, 129, 0.3);
+            transition: transform 0.1s ease;
+            flex-shrink: 0;
+        }
+
+        .play-btn:active {
+            transform: scale(0.92);
+        }
+
+        /* Pop-up Modals */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            max-width: 320px;
+            width: 85%;
+            text-align: center;
+            border: 2px solid var(--accent-pink);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            position: relative;
+            animation: popUp 0.3s ease;
+        }
+
+        @keyframes popUp {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--accent-pink);
+            font-weight: bold;
+        }
+
+        .bucket-anim {
+            font-size: 60px;
+            display: inline-block;
+            animation: bounceBucket 0.8s infinite alternate ease-in-out;
+            margin: 15px 0;
+        }
+
+        @keyframes bounceBucket {
+            from { transform: translateY(0) rotate(-10deg); }
+            to { transform: translateY(-18px) rotate(10deg); }
+        }
+
+        .surprise-img {
+            width: 100%;
+            border-radius: 12px;
+            margin-top: 10px;
+            border: 2px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+<div class="mobile-container">
+    
+    <!-- Header -->
+    <header>
+        <h1>HANNAH'S CUTE WORLD🫶🏻</h1>
+        <div class="nav-icons">
+            <div class="nav-item" onclick="openBucketModal()">📋 <span>Bucket List</span></div>
+            <div class="nav-item" onclick="openSurpriseModal()">🎁 <span>Surprise</span></div>
+        </div>
+    </header>
+
+    <!-- Galeri Foto Polaroid (10 Slides) -->
+    <div class="card">
+        <div class="card-title">OUR MEMORIES 📸</div>
+        <div class="polaroid-container">
+            <div class="polaroid"><img src="/Foto/IMG-20260418-WA0015.jpg" alt="Foto 1"><div class="polaroid-caption">imooeett🤏🏻🤏🏻</div></div>
+            <div class="polaroid"><img src="/Foto/IMG-20260130-WA0033.jpg" alt="Foto 2">our first fotbarr<div class="polaroid-caption"></div></div>
+            <div class="polaroid"><img src="/Foto/IMG-20260817-WA0144.jpg" alt="Foto 3"><div class="polaroid-caption"></div></div>
+            <div class="polaroid"><img src="/Foto/IMG-20260803-WA0066.jpg" alt="Foto 4">anehh😮‍💨<div class="polaroid-caption"</div></div>
+            <div class="polaroid"><img src="/Foto/IMG-20260616-WA0046.jpg" alt="Foto 5"><div class="polaroid-caption">peacee✌🏻✌🏻</div></div>
+            <div class="polaroid"><img src="/Foto/IMG-20260716-WA0017.jpg" alt="Foto 6"><div class="polaroid-caption">MAMPUSSHH JELEKK BANGETTT OWKWKWO</div></div>
+            <div class="polaroid"><img src="/Foto/IMG-20260716-WA0010.jpg" alt="Foto 7"><div class="polaroid-caption">unyuuu😙</div></div>
+            <div class="polaroid"><img src="/Foto/IMG-20260616-WA0036.jpg" alt="Foto 8"><div class="polaroid-caption"></div></div>
+            <div class="polaroid"><img src="/Foto/IMG-20260506-WA0092.jpg" alt="Foto 9"><div class="polaroid-caption"></div></div>
+            <div class="polaroid"><img src="/Foto/IMG-20260427-WA0003.jpg"><div class="polaroid-caption">andd don't forget our wedding haha😆😆</div></div>
+        </div>
+    </div>
+
+    <!-- Mood Tracker -->
+    <div class="card">
+        <div class="card-title">HOW'S YOUR MOOD TODAY? 🐾</div>
+        <div class="mood-options">
+            <div class="mood-btn" onclick="setMood('Happy Cat 🐱')">🐱<br>Happy</div>
+            <div class="mood-btn" onclick="setMood('Sleepy Bear 🐻')">🐻<br>Sleepy</div>
+            <div class="mood-btn" onclick="setMood('Excited Rabbit 🐰')">🐰<br>Excited</div>
+        </div>
+    </div>
+
+    <!-- Daily Surprises / Coupons -->
+    <div class="card">
+        <div class="card-title">DAILY SURPRISES 🎁</div>
+        <div class="action-buttons">
+            <button class="btn btn-feed" onclick="alert('Meow! Kucingnya sudah kenyang 🐱✨')">🥣 Feed Cat</button>
+            <button class="btn btn-coupon" onclick="claimCoupon()">🎟️ Claim Coupon</button>
+        </div>
+    </div>
+
+    <!-- Wishlist Form (WhatsApp Direct) -->
+    <div class="card">
+        <div class="card-title">SEND WISH TO ME ✨</div>
+        <textarea id="wishInput" rows="3" placeholder="Tuliskan keinginan atau permintaan kamu di sini yaa sayanggg"></textarea>
+        <button class="btn btn-coupon" onclick="sendWishToWA()">📲 Kirim ke WhatsApp</button>
+    </div>
+
+</div>
+
+<!-- Floating Cat Icon -->
+<div class="floating-cat" onclick="alert('LOVEEE UUU BB')">🐱</div>
+
+<!-- Floating Music Player Bar -->
+<div class="music-player-bar">
+    <div class="music-info">
+        <div class="disc-icon" id="discIcon">🎵</div>
+        <div class="song-text">
+            <div class="song-title" id="songTitle">beautiful song for beautiful human</div>
+            <div class="song-artist" id="songArtist">ini lagi yg paling menggambarkan kita</div>
+        </div>
+    </div>
+    <button class="play-btn" id="playBtn" onclick="toggleMusic()">▶</button>
+</div>
+
+<!-- Modal Bucket List -->
+<div class="modal-overlay" id="bucketModal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeBucketModal()">&times;</span>
+        <div style="font-weight: 800; color: var(--accent-pink); font-size: 18px;">BUCKET LIST ANIMATION 🌹</div>
+        <div class="bucket-anim">💐</div>
+        <p style="font-size: 13px; color: #666;">cumaa emojii sii, ga beneran</p>
+    </div>
+</div>
+
+<!-- Modal Surprise Photo -->
+<div class="modal-overlay" id="surpriseModal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeSurpriseModal()">&times;</span>
+        <div style="font-weight: 800; color: var(--accent-pink); font-size: 18px;">SPECIAL SURPRISE! 🎁</div>
+        <img src="/Foto/IMG_20260701_212002_629.jpg" alt="Surprise Photo" class="surprise-img">
+        <p style="font-size: 13px; color: #666; margin-top: 8px;">JELEKKK BANGETTT HAHAHA</p>
+    </div>
+</div>
+
+<!-- Audio Element -->
+<audio id="bgMusic" loop src="/lagu/Payung Teduh - Akad Official Music Video.mp3"></audio>
+
+<script>
+    function setMood(mood) {
+        alert("Mood kamu hari ini diset ke: " + mood + "!");
+    }
+
+    // List Kalimat Kupon Acak
+    const couponList = [
+        "one hugg?",
+        "some kiss? ",
+        "request aja, mau apa sayang? ",
+        "jalan-jalann ke everywheree??",
+        "sleep call sampe pagiii",
+        "bebas minta dipeluk sehariann!! "
+    ];
+
+    function claimCoupon() {
+        const randomSentence = couponList[Math.floor(Math.random() * couponList.length)];
+        alert("Kupon Kamu: " + randomSentence);
+    }
+
+    // Fungsi Kirim Wish ke WhatsApp
+    function sendWishToWA() {
+        const wishText = document.getElementById('wishInput').value;
+        if (!wishText.trim()) {
+            alert("Tulis wishlist kamu dulu yaa sayanggg");
+            return;
+        }
+        
+        // PASTIIN GANTI NOMOR HP DI BAWAH INI DENGAN NOMOR KAMU (Pakai format 62...)
+        const noWa = "6283168931587"; 
+        const message = encodeURIComponent("cayangg Ini wishlist akuu🥺👉🏻👈🏻:\n\n" + wishText);
+        window.open("https://wa.me/" + noWa + "?text=" + message, "_blank");
+    }
+
+    // Modal Bucket & Surprise Functions
+    function openBucketModal() {
+        document.getElementById('bucketModal').classList.add('active');
+    }
+    function closeBucketModal() {
+        document.getElementById('bucketModal').classList.remove('active');
+    }
+
+    function openSurpriseModal() {
+        document.getElementById('surpriseModal').classList.add('active');
+    }
+    function closeSurpriseModal() {
+        document.getElementById('surpriseModal').classList.remove('active');
+    }
+
+    // Audio Control
+    const bgMusic = document.getElementById('bgMusic');
+    const playBtn = document.getElementById('playBtn');
+    const discIcon = document.getElementById('discIcon');
+
+    function toggleMusic() {
+        if (bgMusic.paused) {
+            bgMusic.play();
+            playBtn.innerText = '❚❚';
+            discIcon.classList.add('spinning');
+        } else {
+            bgMusic.pause();
+            playBtn.innerText = '▶';
+            discIcon.classList.remove('spinning');
+        }
+    }
+</script>
+
+</body>
+</html>
